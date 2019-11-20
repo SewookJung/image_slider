@@ -39,6 +39,7 @@
   border: 2px solid grey;
   z-index: 100;
   margin: 0px 10px;
+  cursor: pointer;
 }
 
 .prevBtn {
