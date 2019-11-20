@@ -80,6 +80,7 @@ function hideDots() {
 
 nextBtn.addEventListener("click", slideToRight);
 prevBtn.addEventListener("click", slideToLeft);
+dots.forEach(dot => dot.addEventListener("click", test));
 nextBtn.addEventListener("mouseenter", paintDots);
 prevBtn.addEventListener("mouseenter", paintDots);
 image_container.addEventListener("transitionend", turningBack);
