@@ -17,7 +17,7 @@ dots.forEach(ele => {
 });
 size = slider_images[0].clientWidth;
 image_container.style.transform = "translateX(" + -size * 1 + "px)";
-slider_order[0].style.backgroundColor = "red";
+slider_order[0].style.backgroundColor = "white";
 
 function slideToRight() {
   if (counter >= slider_images.length - 1) return;
@@ -25,9 +25,9 @@ function slideToRight() {
   counter++;
   slider_order[counter - 2].style.backgroundColor = "inherit";
   if (slider_images[counter].className === "first-image") {
-    slider_order[0].style.backgroundColor = "red";
+    slider_order[0].style.backgroundColor = "white";
   } else {
-    slider_order[counter - 1].style.backgroundColor = "red";
+    slider_order[counter - 1].style.backgroundColor = "white";
   }
   image_container.style.transform = "translateX(" + -size * counter + "px)";
   image_container.style.transition = "transform 1s ease-in-out";
@@ -42,9 +42,9 @@ function slideToLeft() {
   slider_order[counter].style.backgroundColor = "inherit";
   if (slider_images[counter].className === "last-image") {
     const image_length = slider_order.length - 1;
-    slider_order[image_length].style.backgroundColor = "red";
+    slider_order[image_length].style.backgroundColor = "white";
   } else {
-    slider_order[counter - 1].style.backgroundColor = "red";
+    slider_order[counter - 1].style.backgroundColor = "white";
   }
   image_container.style.transform = "translateX(" + -size * counter + "px)";
   image_container.style.transition = "transform 1s ease-in-out";
@@ -85,3 +85,4 @@ prevBtn.addEventListener("mouseenter", paintDots);
 image_container.addEventListener("transitionend", turningBack);
 image_container.addEventListener("mouseenter", paintDots);
 image_container.addEventListener("mouseleave", hideDots);
+dots.forEach(dot => dot.addEventListener("mouseenter", paintDots));
