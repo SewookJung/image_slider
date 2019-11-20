@@ -1,27 +1,51 @@
 const image_container = document.querySelector(".slider-images");
 const slider_images = document.querySelectorAll(".slider-images img");
+const slider_order = document.querySelectorAll(".dots-container .slider-dot");
+const slider_dots = document.querySelectorAll(".slider-dot");
 
 const prevBtn = document.querySelector(".prevBtn");
 const nextBtn = document.querySelector(".nextBtn");
 
 let counter = 1;
 let size = "";
+let dots = Array.from(slider_dots);
+let status = "";
 
+//Default Setting
+dots.forEach(ele => {
+  ele.style.opacity = "0";
+});
 size = slider_images[0].clientWidth;
 image_container.style.transform = "translateX(" + -size * 1 + "px)";
+slider_order[0].style.backgroundColor = "red";
 
 function slideToRight() {
   if (counter >= slider_images.length - 1) return;
   size = slider_images[0].clientWidth;
   counter++;
+  slider_order[counter - 2].style.backgroundColor = "inherit";
+  if (slider_images[counter].className === "first-image") {
+    slider_order[0].style.backgroundColor = "red";
+  } else {
+    slider_order[counter - 1].style.backgroundColor = "red";
+  }
   image_container.style.transform = "translateX(" + -size * counter + "px)";
   image_container.style.transition = "transform 1s ease-in-out";
 }
+
+//Buttons
 
 function slideToLeft() {
   if (counter <= 0) return;
   size = slider_images[0].clientWidth;
   counter--;
+  slider_order[counter].style.backgroundColor = "inherit";
+  if (slider_images[counter].className === "last-image") {
+    const image_length = slider_order.length - 1;
+    slider_order[image_length].style.backgroundColor = "red";
+  } else {
+    slider_order[counter - 1].style.backgroundColor = "red";
+  }
   image_container.style.transform = "translateX(" + -size * counter + "px)";
   image_container.style.transition = "transform 1s ease-in-out";
 }
@@ -39,6 +63,25 @@ function turningBack() {
   }
 }
 
+//Images Dots
+function paintDots() {
+  dots.forEach(ele => {
+    ele.style.opacity = "1";
+    ele.style.transition = "opacity 1s ease-in-out";
+  });
+}
+
+function hideDots() {
+  dots.forEach(ele => {
+    ele.style.opacity = "0";
+    ele.style.transition = "opacity 1s ease-in-out";
+  });
+}
+
 nextBtn.addEventListener("click", slideToRight);
 prevBtn.addEventListener("click", slideToLeft);
+nextBtn.addEventListener("mouseenter", paintDots);
+prevBtn.addEventListener("mouseenter", paintDots);
 image_container.addEventListener("transitionend", turningBack);
+image_container.addEventListener("mouseenter", paintDots);
+image_container.addEventListener("mouseleave", hideDots);
