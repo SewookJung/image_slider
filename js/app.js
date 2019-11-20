@@ -78,6 +78,10 @@ function hideDots() {
   });
 }
 
+function test(event) {
+  console.log(event);
+}
+
 nextBtn.addEventListener("click", slideToRight);
 prevBtn.addEventListener("click", slideToLeft);
 dots.forEach(dot => dot.addEventListener("click", test));
